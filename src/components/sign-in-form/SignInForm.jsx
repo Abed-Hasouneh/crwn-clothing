@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 import FormInput from '../../DL/form-input/FormInput'
 import Button, {BUTTON_TYPE_CLASSES} from '../../DL/button/Button';
@@ -19,6 +20,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate()
 
 
   const resetFormFields = () => {
@@ -36,6 +38,7 @@ const SignInForm = () => {
     try {
       await signInAuthUserWithEmailAndPassword(email,password);
       resetFormFields();
+      navigate('/')
     } catch (error) {
       console.log('user sign in failed', error);
     }
